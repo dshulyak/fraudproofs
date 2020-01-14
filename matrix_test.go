@@ -17,11 +17,16 @@ func sliceFromString(row string) [][]byte {
 }
 
 func TestMatrixAddRow(t *testing.T) {
-	expected := `foo bar
-baz tet`
-	mx := NewMatrix(2)
-	mx.AddRow(0, 0, [][]byte{[]byte("foo"), []byte("bar")})
-	mx.AddRow(1, 0, [][]byte{[]byte("baz"), []byte("tet")})
+	expected := `foo fee tii all
+ooo ppp qqq zzz
+zzz yyy uuu aaa
+qqq wer rrr ///`
+
+	mx := NewMatrix(4)
+	mx.AddRow(0, 0, sliceFromString("foo fee tii all"))
+	mx.AddRow(1, 0, sliceFromString("ooo ppp qqq zzz"))
+	mx.AddRow(2, 0, sliceFromString("zzz yyy uuu aaa"))
+	mx.AddRow(3, 0, sliceFromString("qqq wer rrr ///"))
 
 	require.Equal(t, expected, mx.PrettyString(false))
 }

@@ -1,9 +1,13 @@
 package fraud
 
-import "github.com/klauspost/reedsolomon"
+import (
+	"fmt"
 
-func NewExtender(chunks, chunkSize int) Extender {
-	enc, err := reedsolomon.New(chunks, chunks)
+	"github.com/klauspost/reedsolomon"
+)
+
+func NewExtender(width, chunkSize int) Extender {
+	enc, err := reedsolomon.New(width, width)
 	if err != nil {
 		// reedsolomon.New can fail only if invalid options are provided
 		panic(err.Error())
@@ -42,6 +46,7 @@ func (e Extender) ExtendHorizontally(m *Matrix, lo, hi int) error {
 			}
 		}
 		if err := e.enc.Encode(row); err != nil {
+			fmt.Println(len(row), err)
 			return err
 		}
 		m.AddRow(i, 0, row)

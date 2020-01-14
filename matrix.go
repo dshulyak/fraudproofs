@@ -22,8 +22,6 @@ func NewMatrix(k int) *Matrix {
 type Matrix struct {
 	k int
 	// in total there will be k*k chunks
-	// i-th row will reside in range [ i*k, (i+1)*k )
-	// j-th colum will reside in range [
 	chunks [][]byte
 }
 
@@ -106,4 +104,12 @@ func (m *Matrix) RowSize() int {
 
 func (m *Matrix) ColumnSize() int {
 	return m.RowSize()
+}
+
+func (m *Matrix) Size() int {
+	return len(m.chunks)
+}
+
+func (m *Matrix) Get(i, j int) []byte {
+	return m.chunks[i*m.k+j]
 }
